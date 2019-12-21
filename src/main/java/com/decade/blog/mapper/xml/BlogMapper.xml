@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.decade.blog.mapper.BlogMapper">
+
+    <!--<select id="findAllBlog" resultMap="blogResultMap">-->
+    <!--select-->
+    <!--u.id,u.openid,u.nickname,u.nickname,u.mobile,u.avatar,-->
+    <!--b.id,b.title,b.content,b.cover,b.status,b.view_count,b.comment-->
+    <!--from blog b-->
+    <!--left join user u on u.id = b.user_id-->
+    <!--</select>-->
+
+    <!--<resultMap id="blogResultMap" type="com.decade.blog.entity.Blog">-->
+    <!--<id property="id" column="id"/>-->
+    <!--<result property="title" column="title"/>-->
+    <!--<result property="content" column="content"/>-->
+    <!--<result property="cover" column="cover"/>-->
+    <!--<result property="status" column="status"/>-->
+    <!--<result property="viewCount" column="view_count"/>-->
+    <!--<result property="comment" column="comment"/>-->
+
+    <!--<association property="user" javaType="com.decade.blog.entity.User">-->
+    <!--<id property="id" column="user_id"/>-->
+    <!--<result property="nickname" column="nickname"/>-->
+    <!--<result property="mobile" column="mobile"/>-->
+    <!--<result property="avatar" column="avatar"/>-->
+    <!--</association>-->
+    <!--</resultMap>-->
+
+    <sql id="baseSql">
+        select id,title,content,cover,status,
+        view_count,comment,original,gmt_create,gmt_modified
+        from blog
+    </sql>
+
+    <select id="findAllBlog" resultType="com.decade.blog.entity.Blog">
+        <include refid="baseSql"></include>
+        order by gmt_modified desc
+    </select>
+
+    <select id="findBlogByTagId" resultType="com.decade.blog.entity.Blog">
+        <include refid="baseSql"></include>
+        where tag_id = #{tagId}
+    </select>
+
+    <insert id="save">
+        insert into blog(id,title,content,cover,status,comment,
+        original,gmt_create,gmt_modified,user_id,tag_id)
+        values(#{id},#{title},#{content},#{cover},#{status},#{comment},
+        #{original},#{gmtCreate},#{gmtModified},#{userId},#{tagId})
+    </insert>
+
+</mapper>

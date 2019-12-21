@@ -1,0 +1,71 @@
+#服务端口
+server:
+  port: 8001
+
+spring:
+  #服务名
+  application:
+    name: blog
+
+  #环境设置：dev、test、prod
+  profiles:
+    active: dev
+
+  #mysql数据库连接
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/blog
+    username: root
+    password: root181911
+
+  #返回json的全局时间格式
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+
+#mybatis日志
+mybatis:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  #配置mapper xml文件的路径
+  mapper-locations: classpath:com/decade/blog/mapper/xml/*.xml
+  #别名处理
+  type-aliases-package: com.decade.blog.entity
+
+
+pagehelper:
+  #分页插件方言选择
+  helperDialect: mysql
+  #合理化参数，设为true时pageNum<=0时会查第一页,pageNum>pages(超过总数时),会查询最后一页
+  reasonable: true
+  supportMethodsArguments: true
+
+#配置阿里云oss的固定值
+#阿里云 OSS
+#不同的服务器，地址不同
+aliyun:
+  oss:
+    file:
+      endPoint: oss-cn-beijing.aliyuncs.com
+      keyId: LTAI4FoifDHTGbrhBLPKkzBA
+      keySecret: sgXyi10PpbtyKoOZUJ41Hi4XP58eHt
+      bucketName: edu-decade
+
+github:
+  client:
+    id: Iv1.c08e07bf8ea38199
+    secret: 373f170d2f560ba6d130744a22746255a1f87eba
+  redirect_uri: http://localhost:8001/callback
+
+
+servlet:
+  multipart:
+    #最大上传单个文件大小：默认1M
+    max-file-size: 1024MB
+    #最大置总上传的数据大小 ：默认10M
+    max-request-size: 1024MB
+
+#excel版本配置
+excel:
+  suffix03: xls
+  suffix07: xlsx

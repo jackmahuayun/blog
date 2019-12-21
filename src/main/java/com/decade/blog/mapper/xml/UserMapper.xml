@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.decade.blog.mapper.UserMapper">
+
+    <sql id="baseSql">
+         select * from user
+    </sql>
+
+    <select id="login" resultType="com.decade.blog.entity.User">
+        <include refid="baseSql"></include>
+        where nickname = #{nickname} and password = #{password}
+    </select>
+
+    <insert id="register">
+        insert into
+        user(id,mobile,nickname,password,sex,avatar,sign,gmt_create,gmt_modified)
+        values(
+            #{id},#{mobile},#{nickname},#{password},
+            #{sex},#{avatar},#{sign},#{gmtCreate},#{gmtModified}
+        )
+    </insert>
+
+    <select id="findAllUser" resultType="com.decade.blog.entity.User">
+      <include refid="baseSql"></include>
+    </select>
+
+</mapper>
