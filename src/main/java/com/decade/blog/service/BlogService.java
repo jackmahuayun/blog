@@ -1,6 +1,7 @@
 package com.decade.blog.service;
 
 import com.decade.blog.entity.Blog;
+import com.decade.blog.entity.query.BlogQueryDTO;
 import com.github.pagehelper.PageInfo;
 
 import javax.servlet.http.HttpSession;
@@ -11,14 +12,6 @@ import javax.servlet.http.HttpSession;
  */
 public interface BlogService {
 
-    /**
-     * 查询所有博客并分页
-     *
-     * @param current
-     * @param size
-     * @return
-     */
-    PageInfo<Blog> findAllBlog(Integer current, Integer size);
 
     /**
      * 根据标签查询所属博客
@@ -39,4 +32,13 @@ public interface BlogService {
      */
     boolean save(Blog blog, HttpSession session);
 
+    /**
+     * 条件查询博客分页
+     *
+     * @param current
+     * @param size
+     * @param blogQueryDTO
+     * @return
+     */
+    PageInfo<Blog> findAllBlog(Integer current, Integer size, BlogQueryDTO blogQueryDTO);
 }

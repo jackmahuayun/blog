@@ -25,6 +25,21 @@ public class UserController {
     private UserService userService;
 
     /**
+     * 模拟登陆
+     *
+     * @return
+     */
+    @PostMapping("login")
+    public Result login() {
+        return Result.success(ResultEnum.DEFAULT_SUCCESS).set("token", "admin");
+    }
+
+    @GetMapping("info")
+    public Result info() {
+        return Result.success(ResultEnum.DEFAULT_SUCCESS).set("roles", "[admin]").set("name", "admin").set("avatar", "https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif");
+    }
+
+    /**
      * 普通账号登录
      *
      * @param nickname

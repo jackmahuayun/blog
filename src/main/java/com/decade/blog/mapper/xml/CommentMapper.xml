@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.decade.blog.mapper.CommentMapper">
+
+    <select id="findAllCommentByBlogId" resultType="com.decade.blog.entity.Comment">
+        select id,nickname,content,avatar,gmt_create,gmt_modified,parent_id,blog_id
+         from comment where blog_id = #{blogId} and parent_id = 0
+         order by gmt_modified asc
+    </select>
+
+    <insert id="save">
+        insert into
+        comment(id,nickname,content,avatar,gmt_create,gmt_modified,parent_id,blog_id)
+        values(#{id},#{nickname},#{content},
+        #{avatar},#{gmtCreate},#{gmtModified},#{parentId},#{blogId})
+    </insert>
+
+</mapper>

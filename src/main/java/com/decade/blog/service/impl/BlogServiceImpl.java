@@ -2,6 +2,7 @@ package com.decade.blog.service.impl;
 
 import com.decade.blog.entity.Blog;
 import com.decade.blog.entity.User;
+import com.decade.blog.entity.query.BlogQueryDTO;
 import com.decade.blog.mapper.BlogMapper;
 import com.decade.blog.service.BlogService;
 import com.decade.blog.utils.Snowflake;
@@ -27,14 +28,6 @@ public class BlogServiceImpl implements BlogService {
     private BlogMapper blogMapper;
 
     @Override
-    public PageInfo<Blog> findAllBlog(Integer current, Integer size) {
-        PageHelper.startPage(current, size);
-        List<Blog> blogList = blogMapper.findAllBlog();
-        PageInfo<Blog> pageInfo = new PageInfo<>(blogList);
-        return pageInfo;
-    }
-
-    @Override
     public PageInfo<Blog> findBlogByTag(Integer current, Integer size, String tagId) {
         PageHelper.startPage(current, size);
         List<Blog> blogList = blogMapper.findBlogByTagId(tagId);
@@ -51,6 +44,14 @@ public class BlogServiceImpl implements BlogService {
         User user = (User) session.getAttribute("user");
         blog.setUserId(user.getId());
         return blogMapper.save(blog) > 0;
+    }
+
+    @Override
+    public PageInfo<Blog> findAllBlog(Integer current, Integer size, BlogQueryDTO blogQueryDTO) {
+        PageHelper.startPage(current, size);
+        List<Blog> blogList = blogMapper.findAllBlogByCondition(blogQueryDTO);
+        PageInfo<Blog> pageInfo = new PageInfo<>(blogList);
+        return pageInfo;
     }
 
 }

@@ -2,6 +2,7 @@ package com.decade.blog.entity;
 
 import java.util.Date;
 import java.io.Serializable;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -14,7 +15,7 @@ import lombok.experimental.Accessors;
  * </p>
  *
  * @author decade
- * @since 2019-12-03
+ * @since 2019-12-21
  */
 @Data
 @EqualsAndHashCode(callSuper = false)

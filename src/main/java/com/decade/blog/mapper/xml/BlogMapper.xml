@@ -33,8 +33,21 @@
         from blog
     </sql>
 
-    <select id="findAllBlog" resultType="com.decade.blog.entity.Blog">
+    <select id="findAllBlogByCondition" resultType="com.decade.blog.entity.Blog">
         <include refid="baseSql"></include>
+        <where>
+            <if test="title != null">
+                title like #{title}
+            </if>
+
+            <if test="status != null">
+                and status=#{status}
+            </if>
+
+            <if test="original != null">
+                and original=#{original}
+            </if>
+        </where>
         order by gmt_modified desc
     </select>
 

@@ -16,7 +16,7 @@ import lombok.experimental.Accessors;
  * </p>
  *
  * @author decade
- * @since 2019-12-03
+ * @since 2019-12-21
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -39,15 +39,15 @@ public class Blog implements Serializable {
     private String cover;
 
     @ApiModelProperty(value = "博客状态 0未发布 1已发布")
-    private Boolean status;
+    private Integer status;
 
     @ApiModelProperty(value = "浏览数量")
     private Long viewCount;
 
-    @ApiModelProperty(value = "是否可以评论：0可以 1不可以")
+    @ApiModelProperty(value = "是否可以评论：1可以 0不可以")
     private Boolean comment;
 
-    @ApiModelProperty(value = "是否原创：0原创 1转载")
+    @ApiModelProperty(value = "是否原创：1原创 0转载")
     private Boolean original;
 
     @ApiModelProperty(value = "创建时间")

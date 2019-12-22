@@ -1,6 +1,7 @@
 package com.decade.blog.controller;
 
 import com.decade.blog.entity.Blog;
+import com.decade.blog.entity.query.BlogQueryDTO;
 import com.decade.blog.enums.ResultEnum;
 import com.decade.blog.service.BlogService;
 import com.decade.blog.vo.Result;
@@ -22,10 +23,19 @@ public class BlogController {
     @Autowired
     private BlogService blogService;
 
-    @GetMapping("/find/{current}/{size}")
+    /**
+     * 使用RequestBody一定要记得使用post请求
+     *
+     * @param current
+     * @param size
+     * @param blogQueryDTO
+     * @return
+     */
+    @PostMapping("/find/{current}/{size}")
     public Result findAllBlog(@PathVariable("current") Integer current,
-                              @PathVariable("size") Integer size) {
-        PageInfo<Blog> pageInfo = blogService.findAllBlog(current, size);
+                              @PathVariable("size") Integer size,
+                              @RequestBody(required = false) BlogQueryDTO blogQueryDTO) {
+        PageInfo<Blog> pageInfo = blogService.findAllBlog(current, size, blogQueryDTO);
         return Result.success(ResultEnum.DEFAULT_SUCCESS).set("page", pageInfo);
     }
 
@@ -39,7 +49,7 @@ public class BlogController {
 
     @PostMapping("save")
     public Result save(@RequestBody Blog blog, HttpSession session) {
-        boolean save = blogService.save(blog,session);
+        boolean save = blogService.save(blog, session);
         if (save) {
             return Result.success(ResultEnum.DEFAULT_SUCCESS);
         }

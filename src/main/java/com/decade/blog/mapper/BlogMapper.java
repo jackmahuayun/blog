@@ -1,6 +1,7 @@
 package com.decade.blog.mapper;
 
 import com.decade.blog.entity.Blog;
+import com.decade.blog.entity.query.BlogQueryDTO;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -12,11 +13,12 @@ import java.util.List;
 public interface BlogMapper {
 
     /**
-     * 查询所有博客
+     * 条件查询所有博客
      *
+     * @param blogQueryDTO
      * @return
      */
-    List<Blog> findAllBlog();
+    List<Blog> findAllBlogByCondition(BlogQueryDTO blogQueryDTO);
 
     /**
      * 根据标签查询所属博客
